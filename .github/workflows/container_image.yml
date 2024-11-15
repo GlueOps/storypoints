@@ -43,14 +43,27 @@ jobs:
             type=sha,format=short,prefix=
             type=sha,format=long,prefix=
 
+
+      - name: Determine version
+        id: determine_version
+        run: |
+          if [ "${GITHUB_REF_TYPE}" == "tag" ]; then
+            VERSION=${GITHUB_REF_NAME}
+          else
+            VERSION=${GITHUB_SHA::7}
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
       - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5.4.0
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          provenance: false
+          labels: |
+            org.opencontainers.image.title=${{ github.repository }}
+            org.opencontainers.image.version=${{ env.VERSION }}
+          build-args: |
+            VERSION=${{ env.VERSION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

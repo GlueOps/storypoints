@@ -26,6 +26,10 @@ COPY app /app
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
+# Accept build argument for version
+ARG VERSION=unknown
+ENV VERSION=${VERSION}
+
 # Create a non-root user and switch to it
 RUN adduser -D appuser
 USER appuser
