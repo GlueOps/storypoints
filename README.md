@@ -12,9 +12,7 @@ This project is a FastAPI application designed to handle GitHub webhooks and aut
 ## Requirements
 
 - Python 3.11
-- FastAPI
-- Requests
-- PyJWT
+- pip
 - Docker (optional)
 
 ## Setup
