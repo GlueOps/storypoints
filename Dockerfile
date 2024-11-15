@@ -5,8 +5,7 @@ FROM python:3.11.9-alpine AS builder
 WORKDIR /app
 
 # Install build dependencies and dependencies in one layer
-RUN apk add --no-cache gcc musl-dev libffi-dev \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the requirements file
 COPY requirements.txt .
