@@ -69,6 +69,14 @@ jobs:
             org.opencontainers.image.version=${{ env.VERSION }}
             org.opencontainers.image.revision=${{ env.COMMIT_SHA }}
             org.opencontainers.image.created=${{ env.BUILD_TIMESTAMP }}
+            org.opencontainers.image.description="FastAPI app for GitHub webhook and project management."
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}
+            org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/docs
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.authors="github@glueops.dev"
+            org.opencontainers.image.vendor="GlueOps"
+            org.opencontainers.image.vcs.url=https://github.com/${{ github.repository }}
+            org.opencontainers.image.vcs.ref=${{ env.COMMIT_SHA }}
           build-args: |
             VERSION=${{ env.VERSION }}
             COMMIT_SHA=${{ env.COMMIT_SHA }}

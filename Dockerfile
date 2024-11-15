@@ -35,12 +35,6 @@ ENV VERSION=${VERSION}
 ENV COMMIT_SHA=${COMMIT_SHA}
 ENV BUILD_TIMESTAMP=${BUILD_TIMESTAMP}
 
-# Add Docker labels for version metadata
-LABEL org.opencontainers.image.title="github.com/glueops/python-webhook-add-to-github-projects"
-LABEL org.opencontainers.image.version="${VERSION}"
-LABEL org.opencontainers.image.revision="${COMMIT_SHA}"
-LABEL org.opencontainers.image.created="${BUILD_TIMESTAMP}"
-
 # Create a non-root user and switch to it
 RUN adduser -D appuser
 USER appuser
