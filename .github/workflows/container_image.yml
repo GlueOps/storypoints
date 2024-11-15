@@ -44,15 +44,19 @@ jobs:
             type=sha,format=long,prefix=
 
 
+
       - name: Determine version
         id: determine_version
         run: |
           if [ "${GITHUB_REF_TYPE}" == "tag" ]; then
             VERSION=${GITHUB_REF_NAME}
           else
-            VERSION=${GITHUB_SHA::7}
+            VERSION=v0.0.0-${GITHUB_SHA::7}
           fi
+          BUILD_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "COMMIT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+          echo "BUILD_TIMESTAMP=${BUILD_TIMESTAMP}" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -63,7 +67,11 @@ jobs:
           labels: |
             org.opencontainers.image.title=${{ github.repository }}
             org.opencontainers.image.version=${{ env.VERSION }}
+            org.opencontainers.image.revision=${{ env.COMMIT_SHA }}
+            org.opencontainers.image.created=${{ env.BUILD_TIMESTAMP }}
           build-args: |
             VERSION=${{ env.VERSION }}
+            COMMIT_SHA=${{ env.COMMIT_SHA }}
+            BUILD_TIMESTAMP=${{ env.BUILD_TIMESTAMP }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

@@ -185,13 +185,14 @@ async def trigger_workflow(request: Request):
     logger.info("Webhook event not relevant for processing.")
     return {"message": "No action taken."}
 
+@app.get("/version")
+async def version():
+    return {
+        "version": os.getenv("VERSION", "unknown"),
+        "commit_sha": os.getenv("COMMIT_SHA", "unknown"),
+        "build_timestamp": os.getenv("BUILD_TIMESTAMP", "unknown")
+    }
+
 @app.get("/health")
 async def health():
-    """
-    Health check endpoint.
-
-    Returns:
-        dict: Health status
-    """
-    logger.debug("Health check endpoint called.")
     return {"status": "healthy"}
