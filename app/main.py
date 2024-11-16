@@ -115,10 +115,6 @@ async def lifespan(app: FastAPI):
         NUM_OF_DAYS_TO_REPROCESS_WEBHOOKS
     )
     logger.info("Scheduled 'retry_failed_deliveries' job to run daily at midnight.")
-    hooks.retry_failed_deliveries(
-        GITHUB_APP_ID,
-        GITHUB_APP_PRIVATE_KEY,
-        NUM_OF_DAYS_TO_REPROCESS_WEBHOOKS)
     # Start background task for running scheduled tasks
     background_tasks = BackgroundTasks()
     background_tasks.add_task(run_scheduled_tasks)
