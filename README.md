@@ -1,4 +1,4 @@
-# python-webhook-add-to-github-projects
+# storypoints
 
 
 This project is a FastAPI application designed to handle GitHub webhooks and automate the process of adding issues to GitHub Projects V2. It listens for specific events from GitHub, such as when an issue is opened or reopened, and automatically adds the issue to a specified GitHub Project V2. This automation helps maintain an up-to-date project board without manual intervention, allowing your team to focus on resolving issues rather than managing them.
