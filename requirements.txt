@@ -1,5 +1,5 @@
 fastapi[standard]==0.115.5
 requests==2.32.3
 glueops-helpers @ https://github.com/GlueOps/python-glueops-helpers-library/archive/refs/tags/v0.4.1.zip
-PyJWT==2.9.0
+PyJWT==2.10.1
 schedule==1.2.2
