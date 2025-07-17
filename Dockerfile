@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.13.5-alpine@sha256:610020b9ad8ee92798f1dbe18d5e928d47358db698969d12730f9686ce3a3191 AS builder
+FROM python:3.13.5-alpine@sha256:610020b9ad8ee92798f1dbe18d5e928d47358db698969d12730f9686ce3a3191
 
 # Set working directory
 WORKDIR /app
@@ -10,15 +10,7 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Use a smaller base image for the final image
-FROM python:3.13.5-alpine@sha256:610020b9ad8ee92798f1dbe18d5e928d47358db698969d12730f9686ce3a3191
 
-# Set working directory
-WORKDIR /app
-
-# Copy the dependencies from the builder stage
-COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-COPY --from=builder /usr/local/bin /usr/local/bin
 
 # Copy the application files
 COPY app /app
