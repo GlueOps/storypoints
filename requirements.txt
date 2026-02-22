@@ -1,4 +1,4 @@
-fastapi[standard]==0.130.0
+fastapi[standard]==0.131.0
 requests==2.32.5
 glueops-helpers @ https://github.com/GlueOps/python-glueops-helpers-library/archive/refs/tags/v0.4.1.zip
 PyJWT==2.11.0
